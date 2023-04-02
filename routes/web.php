@@ -41,6 +41,7 @@ Route::get('/dashboard', [HomeController::class, 'index'])->name('home')->middle
 Route::group(['middleware' => 'auth'], function () {
   Route::get('/virtual-reality', [PageController::class, 'vr'])->name('virtual-reality');
   Route::get('/rtl', [PageController::class, 'rtl'])->name('rtl');
+  Route::get('/user-management', [PageController::class, 'userManagement'])->name('user-management');
   Route::get('/profile', [UserProfileController::class, 'show'])->name('profile');
   Route::post('/profile', [UserProfileController::class, 'update'])->name('profile.update');
   Route::get('/profile-static', [PageController::class, 'profile'])->name('profile-static');
