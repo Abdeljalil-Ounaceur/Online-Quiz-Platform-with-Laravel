@@ -17,13 +17,14 @@ Route::get('/', function () {
   return view('welcome');
 });
 
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\ResetPassword;
 use App\Http\Controllers\ChangePassword;
+use App\Http\Controllers\UserController;
+
 
 
 Route::get('/', function () {
@@ -37,9 +38,14 @@ Route::get('/reset-password', [ResetPassword::class, 'show'])->middleware('guest
 Route::post('/reset-password', [ResetPassword::class, 'send'])->middleware('guest')->name('reset.perform');
 Route::get('/change-password', [ChangePassword::class, 'show'])->middleware('guest')->name('change-password');
 Route::post('/change-password', [ChangePassword::class, 'update'])->middleware('guest')->name('change.perform');
-Route::get('/dashboard', [HomeController::class, 'index'])->name('home')->middleware('auth');
+Route::get('/dashboard', [UserController::class, 'index'])->name('home')->middleware('auth');
 Route::group(['middleware' => 'auth'], function () {
-  Route::get('/user-management', [PageController::class, 'userManagement'])->middleware('admin')->name('user-management');
+
+  Route::group(['middleware' => 'admin'], function () {
+    Route::get('/user-management', [PageController::class, 'userManagement']);
+    Route::post('/user-management/{id}', [UserController::class, 'edit'])->name('user.edit');
+    Route::delete('/user-management/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+  });
   Route::get('/profile', [UserProfileController::class, 'show'])->name('profile');
   Route::post('/profile', [UserProfileController::class, 'update'])->name('profile.update');
   Route::get('/tables', [PageController::class, 'tables'])->middleware('teacher');

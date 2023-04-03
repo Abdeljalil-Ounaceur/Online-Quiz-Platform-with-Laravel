@@ -43,8 +43,16 @@
                 </td>
                 <td class="align-middle text-end">
                   <div class="d-flex px-3 py-1 justify-content-center align-items-center">
-                    <button class="btn btn-light mx-2 font-weight-bold mb-0">Edit</button>
-                    <button class="btn btn-light mx-2 font-weight-bold mb-0">Delete</button>
+                    <form action="{{route('user.edit',['id' => $user->id])}}" method="POST" style="display: inline-block;">
+                      @csrf
+                      @method('POST')
+                    <button type="submit" class="btn btn-light mx-2 font-weight-bold mb-0">Edit</button>
+                    </form>
+                    <form action="{{route('user.destroy',['id' => $user->id])}}" method="post" style="display: inline-block;">
+                      @csrf
+                      @method('DELETE')
+                     <button type=submit" class="btn btn-light mx-2 font-weight-bold mb-0">Delete</button>
+                    </form>
                   </div>
                 </td>
               </tr>
