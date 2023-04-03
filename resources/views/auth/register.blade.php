@@ -27,13 +27,13 @@
                 </div>
                 <div class="mb-2">
                   <div class="form-check d-inline-block mx-2">
-                    <input class="form-check-input" type="radio" name="isTeacher" id="candidatRB" value="0" checked>
+                    <input class="form-check-input" type="radio" name="user_type" id="candidatRB" value="candidat" checked>
                     <label class="form-check-label" for="candidatRB">
                       Candidat
                     </label>
                   </div>
                   <div class="form-check d-inline-block">
-                    <input class="form-check-input" type="radio" name="isTeacher" id="teacherRB" value="1">
+                    <input class="form-check-input" type="radio" name="user_type" id="teacherRB" value="teacher">
                     <label class="form-check-label" for="teacherRB">
                       Teacher
                     </label>
