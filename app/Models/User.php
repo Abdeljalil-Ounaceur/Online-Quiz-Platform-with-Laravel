@@ -23,7 +23,7 @@ class User extends Authenticatable
     'lastname',
     'email',
     'password',
-    'isTeacher',
+    'user_type',
     'address',
     'city',
     'country',

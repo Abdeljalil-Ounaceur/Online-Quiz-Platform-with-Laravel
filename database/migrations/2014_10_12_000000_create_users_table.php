@@ -21,7 +21,7 @@ return new class extends Migration
       $table->string('email')->unique();
       $table->timestamp('email_verified_at')->nullable();
       $table->string('password');
-      $table->boolean('isTeacher')->default(false);
+      $table->string('user_type')->default('candidat');
       $table->string('address')->nullable();
       $table->string('city')->nullable();
       $table->string('country')->nullable();
