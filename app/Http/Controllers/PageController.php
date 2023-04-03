@@ -24,18 +24,18 @@ class PageController extends Controller
 
   public function userManagement()
   {
-    return view("pages.user-management", [
+    return view("pages.admin.user-management", [
       'users' => User::all()
     ]);
   }
 
   public function tables()
   {
-    return view("pages.tables");
+    return view("pages.teacher.tables");
   }
 
   public function billing()
   {
-    return view("pages.billing");
+    return view("pages.candidat.billing");
   }
 }
