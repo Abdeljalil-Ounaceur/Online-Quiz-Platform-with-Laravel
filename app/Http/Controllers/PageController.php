@@ -28,4 +28,14 @@ class PageController extends Controller
       'users' => User::all()
     ]);
   }
+
+  public function tables()
+  {
+    return view("pages.tables");
+  }
+
+  public function billing()
+  {
+    return view("pages.billing");
+  }
 }

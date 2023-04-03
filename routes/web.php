@@ -39,9 +39,11 @@ Route::get('/change-password', [ChangePassword::class, 'show'])->middleware('gue
 Route::post('/change-password', [ChangePassword::class, 'update'])->middleware('guest')->name('change.perform');
 Route::get('/dashboard', [HomeController::class, 'index'])->name('home')->middleware('auth');
 Route::group(['middleware' => 'auth'], function () {
-  Route::get('/user-management', [PageController::class, 'userManagement'])->name('user-management');
+  Route::get('/user-management', [PageController::class, 'userManagement'])->middleware('admin')->name('user-management');
   Route::get('/profile', [UserProfileController::class, 'show'])->name('profile');
   Route::post('/profile', [UserProfileController::class, 'update'])->name('profile.update');
+  Route::get('/tables', [PageController::class, 'tables'])->middleware('teacher');
+  Route::get('/billing', [PageController::class, 'billing'])->middleware('candidat');
   Route::get('/{page}', [PageController::class, 'index'])->name('page');
   Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 });

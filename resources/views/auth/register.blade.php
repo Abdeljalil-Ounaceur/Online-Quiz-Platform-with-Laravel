@@ -25,6 +25,20 @@
                   <input type="password" name="password" class="form-control" placeholder="Password" aria-label="Password">
                   @error('password') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                 </div>
+                <div class="mb-2">
+                  <div class="form-check d-inline-block mx-2">
+                    <input class="form-check-input" type="radio" name="isTeacher" id="candidatRB" value="0" checked>
+                    <label class="form-check-label" for="candidatRB">
+                      Candidat
+                    </label>
+                  </div>
+                  <div class="form-check d-inline-block">
+                    <input class="form-check-input" type="radio" name="isTeacher" id="teacherRB" value="1">
+                    <label class="form-check-label" for="teacherRB">
+                      Teacher
+                    </label>
+                  </div>
+                </div>
                 <div class="form-check form-check-info text-start">
                   <input class="form-check-input" type="checkbox" name="terms" id="flexCheckDefault">
                   <label class="form-check-label" for="flexCheckDefault">
