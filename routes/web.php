@@ -39,6 +39,7 @@ Route::post('/reset-password', [ResetPassword::class, 'send'])->middleware('gues
 Route::get('/change-password', [ChangePassword::class, 'show'])->middleware('guest')->name('change-password');
 Route::post('/change-password', [ChangePassword::class, 'update'])->middleware('guest')->name('change.perform');
 Route::get('/dashboard', [UserController::class, 'index'])->name('home')->middleware('auth');
+
 Route::group(['middleware' => 'auth'], function () {
 
   Route::group(['middleware' => 'admin'], function () {
@@ -46,10 +47,19 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/user-management/{id}', [UserController::class, 'edit'])->name('user.edit');
     Route::delete('/user-management/{id}', [UserController::class, 'destroy'])->name('user.destroy');
   });
+
+  Route::group(['middlware' => 'teacher'], function () {
+    Route::get('/mytests', [PageController::class, 'mytests'])->name('mytests');
+    Route::get('/edit/{id}', [PageController::class, 'editTest'])->name('edit-test');
+    Route::get('/delete/{id}', [PageController::class, 'deleteTest'])->name('delete-test');
+  });
+
+  Route::group(['middlware' => 'candidat'], function () {
+    Route::get('/tests', [PageController::class, 'tests'])->name('tests');
+  });
+
   Route::get('/profile', [UserProfileController::class, 'show'])->name('profile');
   Route::post('/profile', [UserProfileController::class, 'update'])->name('profile.update');
-  Route::get('/mytests', [PageController::class, 'mytests'])->middleware('teacher')->name('mytests');
-  Route::get('/tests', [PageController::class, 'tests'])->middleware('candidat');
   Route::get('/{page}', [PageController::class, 'index'])->name('page');
   Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 });

@@ -19,8 +19,8 @@
                   <span class="mb-2 text-xs">Description: <span class="text-dark font-weight-bold ms-sm-2">{{$test->description}}</span></span>
                 </div>
                 <div class="ms-auto text-end">
-                  <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
-                  <a class="btn btn-link text-danger px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2" aria-hidden="true"></i>Delete</a>
+                  <a class="btn btn-link text-dark px-3 mb-0" href="{{route('edit-test', ['id'=>$test->id])}}"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
+                  <a class="btn btn-link text-danger px-3 mb-0" href="{{route('delete-test', ['id'=>$test->id])}}"><i class="far fa-trash-alt me-2" aria-hidden="true"></i>Delete</a>
                 </div>
               </li>
             @endforeach
