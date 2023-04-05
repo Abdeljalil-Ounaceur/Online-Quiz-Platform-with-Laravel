@@ -63,6 +63,6 @@ class User extends Authenticatable
 
   public function tests()
   {
-    return $this->hasMany(Test::class);
+    return $this->hasMany(Test::class, 'user_id');
   }
 }

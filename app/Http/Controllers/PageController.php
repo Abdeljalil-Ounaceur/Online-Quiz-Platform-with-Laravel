@@ -30,9 +30,10 @@ class PageController extends Controller
     ]);
   }
 
-  public function tables()
+  public function mytests()
   {
-    return view("pages.teacher.tables");
+    $id  =  auth()->user()->id;
+    return view("pages.teacher.mytests", ['tests' => Test::where('user_id', $id)->get()]);
   }
 
   public function tests()

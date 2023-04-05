@@ -48,7 +48,7 @@ Route::group(['middleware' => 'auth'], function () {
   });
   Route::get('/profile', [UserProfileController::class, 'show'])->name('profile');
   Route::post('/profile', [UserProfileController::class, 'update'])->name('profile.update');
-  Route::get('/tables', [PageController::class, 'tables'])->middleware('teacher');
+  Route::get('/mytests', [PageController::class, 'mytests'])->middleware('teacher')->name('mytests');
   Route::get('/tests', [PageController::class, 'tests'])->middleware('candidat');
   Route::get('/{page}', [PageController::class, 'index'])->name('page');
   Route::post('logout', [LoginController::class, 'logout'])->name('logout');
