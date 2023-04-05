@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Test;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -34,8 +35,8 @@ class PageController extends Controller
     return view("pages.teacher.tables");
   }
 
-  public function billing()
+  public function tests()
   {
-    return view("pages.candidat.billing");
+    return view("pages.candidat.tests", ['tests' => Test::all()]);
   }
 }

@@ -16,7 +16,7 @@ class UserController extends Controller
   {
     return match (auth()->user()->user_type) {
       'admin' => redirect('/user-management'),
-      'candidat' => redirect('/billing'),
+      'candidat' => redirect('/tests'),
       'teacher' => redirect('/tables'),
     };
   }

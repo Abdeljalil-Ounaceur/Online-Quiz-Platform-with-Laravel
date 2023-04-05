@@ -60,4 +60,9 @@ class User extends Authenticatable
   {
     $this->attributes['password'] = bcrypt($value);
   }
+
+  public function tests()
+  {
+    return $this->hasMany(Test::class);
+  }
 }
