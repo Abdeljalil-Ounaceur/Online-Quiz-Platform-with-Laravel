@@ -23,6 +23,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\ResetPassword;
 use App\Http\Controllers\ChangePassword;
+use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
 
 
@@ -53,6 +54,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/create', [PageController::class, 'createTest'])->name('create-test');
     Route::get('/edit/{id}', [PageController::class, 'editTest'])->name('edit-test');
     Route::get('/delete/{id}', [PageController::class, 'deleteTest'])->name('delete-test');
+    Route::post('/save', [TestController::class, 'store'])->name('save-test');
   });
 
   Route::group(['middlware' => 'candidat'], function () {

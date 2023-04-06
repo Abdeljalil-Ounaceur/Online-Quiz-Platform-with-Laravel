@@ -10,6 +10,12 @@ class Test extends Model
 {
   use HasFactory;
 
+  protected $fillable = [
+    'user_id',
+    'title',
+    'description',
+  ];
+
   public function owner()
   {
     return $this->belongsTo(User::class, 'user_id');

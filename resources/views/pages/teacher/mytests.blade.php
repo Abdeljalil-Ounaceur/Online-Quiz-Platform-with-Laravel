@@ -6,10 +6,8 @@
   <div class="col-12 mt-4 mx-auto">
     <div class="card">
       <div class="card-header pb-0 px-3">
-        <div class="ms-auto text-end">
-          <a class="btn btn-link btn-success px-3 mb-0" href="{{route('create-test')}}">+</a>
-        </div>
-        <h6 class="mb-0">My Test List</h6>
+        <h5 style="float: left" class="m-2">My Test List</h5>
+        <a style="float: right" class="btn btn-sm btn-outline-success" href="{{route('create-test')}}">add Test</a>
       </div>
       <div class="card-body pt-4 p-3">
         <ul class="list-group">
