@@ -23,16 +23,24 @@
                 <ul id="questions" class="list-group">
                   @php($i=1)
                   @foreach ($test->questions as $question)
+                  @php($k=1)
+                  @foreach($question->reponses as $reponse)
+                    @if(!$reponse->estCorrecte)
+                      @break
+                    @php($k++)
+                    @endif
+                  @endforeach
                   <li id="question {{$i}}" class="list-group-item pb-4 mb-2" style="background-color: lightgray" >
                     <label for="question text {{$i}}">Question {{$i}}</label>
                     <input type="text" id="question text {{$i}}" class="form-control" name="question text {{$i}}" value='{{$question->text}}'><br>
                     <label for="answerList {{$i}}">Answers</label>
+                    <input hidden id="radio selected {{$i}}" name="radio {{$i}} {{$k}}" value="on"/>
                     <ol type="a" id="answerList {{$i}}">
                       @php($j = 1)
                       @foreach ($question->reponses as $reponse)
                       <li class="list-group-item" style="background-color: #dddddd">
                         <label for="answer {{$i}} {{$j}}">{{$j}}. </label>
-                        <input type="radio" id="radio {{$i}} {{$j}}" class="mx-2" name="radio {{$i}}" {{$reponse->estCorrecte ? 'checked' : ''}}>
+                        <input type="radio" id="radio {{$i}} {{$j}}" class="mx-2" name="radio {{$i}}" {{$reponse->estCorrecte ? 'checked' : ''}} onchange="changeSelectedRadioButton(this)">
                         <input type="text" id="answer {{$i}} {{$j}}" class="" name="answer {{$i}} {{$j}}" value='{{$reponse->text}}'">
                         @if ($loop->last)
                             <button class="mx-3" type="button" onclick="addAnswer(this)">+</button>
@@ -58,7 +66,7 @@
                 li.className = "list-group-item";
                 li.innerHTML = ""+
                     "<label for='"+id_ans+"'>"+n_ans+".&nbsp </label>"+
-                    "<input type=\"radio\" id=\"radio "+n_quest+" "+n_ans+"\" class=\"mx-2\" name=\"radio "+n_quest+"\">"+
+                    "<input type=\"radio\" id=\"radio "+n_quest+" "+n_ans+"\" class=\"mx-2\" name=\"radio "+n_quest+"\" onchange=\"changeSelectedRadioButton(this)\">"+
                     "<input type=\"text\" id='"+id_ans+"' class='mx-1' name='"+id_ans+"'>"+
                     "<button class=\"mx-3\" type=\"button\" onclick=\"addAnswer(this)\">+</button>"
                   "";
@@ -79,6 +87,7 @@
                     "<label for=\"question text "+n_quest+"\">Question "+n_quest+"</label>" +
                     "<input type=\"text\" id=\"question text "+n_quest+"\" class=\"form-control\" name=\"question text "+n_quest+"\"><br>"+
                     "<label for=\"answerList "+n_quest+"\">Answers</label>"+
+                    "<input hidden id=\"radio selected "+n_quest+"\" name=\"radio "+n_quest+" 1\" value=\"on\"/>"+
                       "<ol type=\"a\" id=\"answerList "+n_quest+"\">"+
                         "<li class=\"list-group-item\" style=\"background-color: #dddddd\">"+
                             "<label for=\"answer "+n_quest+" 1\">1. </label>"+
@@ -89,6 +98,17 @@
                       "</ol>";
                 li.id = id_quest;
                 questionList.appendChild(li);
+              }
+              function changeSelectedRadioButton(rb){
+                buttonIndex = rb.id.substring(8);
+                buttonQuestionIndex = rb.id.substring(6,7);
+                console.log(rb.id);
+                console.log(buttonQuestionIndex);
+                console.log(buttonIndex);
+                console.log("radio selected "+buttonQuestionIndex);
+                input = document.getElementById("radio selected "+buttonQuestionIndex);
+                input.name = "radio "+buttonQuestionIndex+" "+buttonIndex;
+                console.log('input name :', input.name);
               }
               </script>
           </div>

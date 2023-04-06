@@ -40,8 +40,13 @@ Route::post('/reset-password', [ResetPassword::class, 'send'])->middleware('gues
 Route::get('/change-password', [ChangePassword::class, 'show'])->middleware('guest')->name('change-password');
 Route::post('/change-password', [ChangePassword::class, 'update'])->middleware('guest')->name('change.perform');
 Route::get('/dashboard', [UserController::class, 'index'])->name('home')->middleware('auth');
+Route::get('/useri', function () {
+  return auth()->user();
+});
 
 Route::group(['middleware' => 'auth'], function () {
+  Route::get('/profile', [UserProfileController::class, 'show'])->name('profile');
+  Route::post('/profile', [UserProfileController::class, 'update'])->name('profile.update');
 
   Route::group(['middleware' => 'admin'], function () {
     Route::get('/user-management', [PageController::class, 'userManagement']);
@@ -62,8 +67,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/tests', [PageController::class, 'tests'])->name('tests');
   });
 
-  Route::get('/profile', [UserProfileController::class, 'show'])->name('profile');
-  Route::post('/profile', [UserProfileController::class, 'update'])->name('profile.update');
   Route::get('/{page}', [PageController::class, 'index'])->name('page');
   Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 });

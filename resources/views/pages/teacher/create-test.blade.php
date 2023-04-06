@@ -23,10 +23,11 @@
                     <label for="question text 1">Question 1</label>
                     <input type="text" id="question text 1" class="form-control" name="question text 1"><br>
                     <label for="answerList 1">Answers</label>
+                      <input hidden id="radio selected 1" name="radio 1 1" value="on"/>
                       <ol type="a" id="answerList 1">
                         <li class="list-group-item" style="background-color: #dddddd">
                             <label for="answer 1 1">1. </label>
-                            <input type="radio" id="radio 1 1" class="mx-2" name="radio 1" checked>
+                            <input type="radio" id="radio 1 1" class="mx-2" name="radio 1" checked onchange="changeSelectedRadioButton(this)">
                             <input type="text" id="answer 1 1" class="" name="answer 1 1">
                             <button class="mx-3" type="button" onclick="addAnswer(this)">+</button>
                         </li>
@@ -46,7 +47,7 @@
                 li.className = "list-group-item";
                 li.innerHTML = ""+
                     "<label for='"+id_ans+"'>"+n_ans+".&nbsp </label>"+
-                    "<input type=\"radio\" id=\"radio "+n_quest+" "+n_ans+"\" class=\"mx-2\" name=\"radio "+n_quest+"\">"+
+                    "<input type=\"radio\" id=\"radio "+n_quest+" "+n_ans+"\" class=\"mx-2\" name=\"radio "+n_quest+"\" onchange=\"changeSelectedRadioButton(this)\">"+
                     "<input type=\"text\" id='"+id_ans+"' class='mx-1' name='"+id_ans+"'>"+
                     "<button class=\"mx-3\" type=\"button\" onclick=\"addAnswer(this)\">+</button>"
                   "";
@@ -67,6 +68,7 @@
                     "<label for=\"question text "+n_quest+"\">Question "+n_quest+"</label>" +
                     "<input type=\"text\" id=\"question text "+n_quest+"\" class=\"form-control\" name=\"question text "+n_quest+"\"><br>"+
                     "<label for=\"answerList "+n_quest+"\">Answers</label>"+
+                    "<input hidden id=\"radio selected "+n_quest+"\" name=\"radio "+n_quest+" 1\" value=\"on\"/>"+
                       "<ol type=\"a\" id=\"answerList "+n_quest+"\">"+
                         "<li class=\"list-group-item\" style=\"background-color: #dddddd\">"+
                             "<label for=\"answer "+n_quest+" 1\">1. </label>"+
@@ -77,6 +79,18 @@
                       "</ol>";
                 li.id = id_quest;
                 questionList.appendChild(li);
+              }
+
+              function changeSelectedRadioButton(rb){
+                buttonIndex = rb.id.substring(8);
+                buttonQuestionIndex = rb.id.substring(6,7);
+                console.log(rb.id);
+                console.log(buttonQuestionIndex);
+                console.log(buttonIndex);
+                console.log("radio selected "+buttonQuestionIndex);
+                input = document.getElementById("radio selected "+buttonQuestionIndex);
+                input.name = "radio "+buttonQuestionIndex+" "+buttonIndex;
+                console.log('input name :', input.name);
               }
               </script>
           </div>

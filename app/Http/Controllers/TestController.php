@@ -57,13 +57,14 @@ class TestController extends Controller
       $pattern = "/^answer_$i/";
       $currentAnswerKeys = array_values(preg_grep($pattern, $keys));
       foreach ($currentAnswerKeys as $ans_key) {
-        $rest =  substr($ans_key, 6, 2);
+        $rest =  substr($ans_key, 6);
         $answer = new Reponse();
         $answer->question_id = $question->id;
         $answer->text = $request[$ans_key];
         $answer->estCorrecte = isset($request["radio" . $rest]);
         $answer->save();
       }
+      $i++;
     }
 
     return redirect('/mytests')->with('success', 'Test Inserted successfully');
