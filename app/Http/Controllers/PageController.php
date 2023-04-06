@@ -46,11 +46,6 @@ class PageController extends Controller
     return view('pages.teacher.create-test');
   }
 
-  public function editTest($id)
-  {
-    return  view('pages.teacher.edit-test', ['test' => Test::findOrFail($id)]);
-  }
-
   public function deleteTest($id)
   {
     Test::findOrFail($id)->delete();

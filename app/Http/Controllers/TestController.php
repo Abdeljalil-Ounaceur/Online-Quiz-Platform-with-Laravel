@@ -57,7 +57,7 @@ class TestController extends Controller
       $pattern = "/^answer_$i/";
       $currentAnswerKeys = array_values(preg_grep($pattern, $keys));
       foreach ($currentAnswerKeys as $ans_key) {
-        $rest =  substr($ans_key, 6);
+        $rest =  substr($ans_key, 6, 2);
         $answer = new Reponse();
         $answer->question_id = $question->id;
         $answer->text = $request[$ans_key];
@@ -66,7 +66,7 @@ class TestController extends Controller
       }
     }
 
-    return $test->questions[0]->reponses;
+    return redirect('/mytests')->with('success', 'Test Inserted successfully');
   }
 
   /**
@@ -86,9 +86,9 @@ class TestController extends Controller
    * @param  \App\Models\Test  $test
    * @return \Illuminate\Http\Response
    */
-  public function edit(Test $test)
+  public function edit($id)
   {
-    //
+    return  view('pages.teacher.edit-test', ['test' => Test::findOrFail($id)]);
   }
 
   /**
@@ -98,9 +98,10 @@ class TestController extends Controller
    * @param  \App\Models\Test  $test
    * @return \Illuminate\Http\Response
    */
-  public function update(Request $request, Test $test)
+  public function update(Request $request)
   {
-    //
+    Test::findOrFail($request['idTest'])->delete();
+    return $this->store($request);
   }
 
   /**

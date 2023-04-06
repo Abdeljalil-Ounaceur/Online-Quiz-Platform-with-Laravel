@@ -52,7 +52,8 @@ Route::group(['middleware' => 'auth'], function () {
   Route::group(['middlware' => 'teacher'], function () {
     Route::get('/mytests', [PageController::class, 'mytests'])->name('mytests');
     Route::get('/create', [PageController::class, 'createTest'])->name('create-test');
-    Route::get('/edit/{id}', [PageController::class, 'editTest'])->name('edit-test');
+    Route::get('/{id}', [TestController::class, 'edit'])->name('edit-test');
+    Route::post('/update-test', [TestController::class, 'update'])->name('update-test');
     Route::get('/delete/{id}', [PageController::class, 'deleteTest'])->name('delete-test');
     Route::post('/save', [TestController::class, 'store'])->name('save-test');
   });
