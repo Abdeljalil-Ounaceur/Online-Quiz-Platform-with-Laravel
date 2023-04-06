@@ -11,16 +11,16 @@
             <div class="card-body pt-4 p-3">
               <form>
                 <ul id="questions" class="list-group">
-                  <li id="question 1" class="list-group-item">
+                  <li id="question 1" class="list-group-item pb-4" style="background-color: lightgray" >
                     <label for="question text 1">Question 1</label>
                     <input type="text" id="question text 1" class="form-control" name="question text 1"><br>
                     <label for="answerList 1">Answers</label>
                       <ol type="a" id="answerList 1">
-                        <li class="list-group-item">
+                        <li class="list-group-item" style="background-color: #eeeeee">
                             <label for="answer 1 1">1. </label>
-                            <input type="radio" id="answer 1 1" class="" name="answerList 1">
+                            <input type="radio" id="radio 1 1" class="mx-2" name="answerList 1">
                             <input type="text" id="answer 1 1" class="" name="answer 1 1">
-                            <button class = "" type="button" onclick="addAnswer(this)">+</button>
+                            <button class="mx-3" type="button" onclick="addAnswer(this)">+</button>
                         </li>
                       </ol>
                   </li>
@@ -34,21 +34,43 @@
                 let n_quest = answerList.id.split(" ")[1];
                 let n_ans = answerList.childElementCount+1;
                 let id_ans = "answer "+n_quest+" "+n_ans;
-                li.innerHTML = ""+
-                    "<label for='"+id_ans+"'>"+n_ans+". </label>"+
-                    "<input type='text' id='"+id_ans+"' class='mx-1' name='"+id_ans+"'>"+
-                    "<button class = '' type='button' onclick='addAnswer(this)''>+</button><br>"
-                  "";
+                let color = (parseInt(n_ans) % 2) === 1 ? "#eeeeee" : "#f2f2f2";
+                li.style.backgroundColor =  color;
+                console.log(li.style.backgroundColor);
                 li.className = "list-group-item";
+                li.innerHTML = ""+
+                    "<label for='"+id_ans+"'>"+n_ans+".&nbsp </label>"+
+                    "<input type=\"radio\" id=\"radio "+n_quest+" "+n_ans+"\" class=\"mx-2\" name=\"answerList "+n_quest+"\">"+
+                    "<input type=\"text\" id='"+id_ans+"' class='mx-1' name='"+id_ans+"'>"+
+                    "<button class=\"mx-3\" type=\"button\" onclick=\"addAnswer(this)\">+</button>"
+                  "";
                 answerList.appendChild(li);
                 console.log(btn.id);
                 btn.parentElement.removeChild(btn);
               }
 
-              function addQuestion(btn) {
-                console.log(btn);
+              function addQuestion() {
                 let li = document.createElement("li");
-                let questionList = getElementById("questions");  
+                let questionList = document.getElementById("questions");
+                let n_quest = questionList.childElementCount+1;
+                let id_quest = "question "+n_quest;
+                li.innerHTML = "" +
+                    "<label for=\"question text "+n_quest+"\">Question "+n_quest+"</label>" +
+                    "<input type=\"text\" id=\"question text "+n_quest+"\" class=\"form-control\" name=\"question text "+n_quest+"\"><br>"+
+                    "<label for=\"answerList "+n_quest+"\">Answers</label>"+
+                      "<ol type=\"a\" id=\"answerList "+n_quest+"\">"+
+                        "<li class=\"list-group-item\">"+
+                            "<label for=\"answer "+n_quest+" 1\">1. </label>"+
+                            "<input type=\"radio\" id=\"radio "+n_quest+" 1\" class=\"mx-2\" name=\"answerList "+n_quest+"\">"+
+                            "<input type=\"text\" id=\"answer "+n_quest+" 1\" class=\"mx-2\" name=\"answer "+n_quest+" 1\">"+
+                            "<button class=\"mx-3\" type=\"button\" onclick=\"addAnswer(this)\">+</button>"+
+                        "</li>"+
+                      "</ol>";
+                li.id = id_quest;
+                li.className = "list-group-item pb-4";
+                questionList.appendChild(li);
+
+
               }
               </script>
           </div>
@@ -57,7 +79,7 @@
       <footer class="footer pt-3">
           <div class="card">
             <div class="card-body pb-0">
-              <button class="btn btn-outline-success px-3 mb-0" onclick="javascript:;">Add Quetion</button>
+              <button class="btn btn-outline-success px-3 mb-0" onclick="addQuestion()">Add Quetion</button>
               <div class="ms-auto text-end" style="float:right">
                 <button class="btn btn-primary" type="submit">Finish</button>
               </div>
