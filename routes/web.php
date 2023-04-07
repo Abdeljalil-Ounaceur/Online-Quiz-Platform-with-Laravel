@@ -23,6 +23,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\ResetPassword;
 use App\Http\Controllers\ChangePassword;
+use App\Http\Controllers\ResultatController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
 
@@ -57,7 +58,7 @@ Route::group(['middleware' => 'auth'], function () {
   Route::middleware('candidat')->group(function () {
     Route::get('/tests', [PageController::class, 'tests'])->name('tests');
     Route::get('/passer-test-{id}', [PageController::class, 'passer'])->name('passer-test');
-    Route::post('/calculer-resultat', [PageController::class, 'calculerResultat'])->name('calculer-resultat');
+    Route::post('/calculer-resultat', [ResultatController::class, 'store'])->name('calculer-resultat');
   });
 
   Route::middleware('teacher')->group(function () {
