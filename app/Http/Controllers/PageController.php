@@ -39,25 +39,8 @@ class PageController extends Controller
     ]);
   }
 
-  public function mytests()
-  {
-    $id  =  auth()->user()->id;
-    return view("pages.teacher.mytests", ['tests' => Test::where('user_id', $id)->get()]);
-  }
-
   public function tests()
   {
-    return view("pages.candidat.tests", ['tests' => Test::all()]);
-  }
-
-  public function createTest()
-  {
-    return view('pages.teacher.create-test');
-  }
-
-  public function deleteTest($id)
-  {
-    Test::findOrFail($id)->delete();
-    return back();
+    return view("pages.candidat.tests", ['tests' => Test::orderBy('created_at', 'desc')->get()]);
   }
 }

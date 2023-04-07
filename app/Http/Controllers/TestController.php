@@ -16,7 +16,8 @@ class TestController extends Controller
    */
   public function index()
   {
-    //
+    $id  =  auth()->user()->id;
+    return view("pages.teacher.mytests", ['tests' => Test::where('user_id', $id)->orderBy('created_at', 'desc')->get()]);
   }
 
   /**
@@ -26,7 +27,7 @@ class TestController extends Controller
    */
   public function create()
   {
-    //
+    return view('pages.teacher.create-test');
   }
 
   /**
@@ -111,8 +112,9 @@ class TestController extends Controller
    * @param  \App\Models\Test  $test
    * @return \Illuminate\Http\Response
    */
-  public function destroy(Test $test)
+  public function destroy($id)
   {
-    //
+    Test::findOrFail($id)->delete();
+    return back()->with('success', 'Test deleted successfullt');
   }
 }

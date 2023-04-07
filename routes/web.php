@@ -48,24 +48,25 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('/profile', [UserProfileController::class, 'show'])->name('profile');
   Route::post('/profile', [UserProfileController::class, 'update'])->name('profile.update');
 
-  Route::group(['middleware' => 'admin'], function () {
+  Route::middleware('admin')->group(function () {
     Route::get('/user-management', [PageController::class, 'userManagement']);
     Route::post('/user-management/{id}', [UserController::class, 'edit'])->name('user.edit');
     Route::delete('/user-management/{id}', [UserController::class, 'destroy'])->name('user.destroy');
   });
 
-  Route::group(['middlware' => 'teacher'], function () {
-    Route::get('/mytests', [PageController::class, 'mytests'])->name('mytests');
-    Route::get('/create', [PageController::class, 'createTest'])->name('create-test');
+  Route::middleware('candidat')->group(function () {
+    Route::get('/tests', [PageController::class, 'tests'])->name('tests');
+  });
+
+  Route::middleware('teacher')->group(function () {
+    Route::get('/mytests', [TestController::class, 'index'])->name('mytests');
+    Route::get('/create', [TestController::class, 'create'])->name('create-test');
     Route::get('/{id}', [TestController::class, 'edit'])->name('edit-test');
     Route::post('/update-test', [TestController::class, 'update'])->name('update-test');
-    Route::get('/delete/{id}', [PageController::class, 'deleteTest'])->name('delete-test');
+    Route::get('/delete/{id}', [TestController::class, 'destroy'])->name('delete-test');
     Route::post('/save', [TestController::class, 'store'])->name('save-test');
   });
 
-  Route::group(['middlware' => 'candidat'], function () {
-    Route::get('/tests', [PageController::class, 'tests'])->name('tests');
-  });
 
   Route::get('/{page}', [PageController::class, 'index'])->name('page');
   Route::post('logout', [LoginController::class, 'logout'])->name('logout');
