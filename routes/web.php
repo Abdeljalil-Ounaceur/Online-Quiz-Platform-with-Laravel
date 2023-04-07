@@ -56,14 +56,16 @@ Route::group(['middleware' => 'auth'], function () {
 
   Route::middleware('candidat')->group(function () {
     Route::get('/tests', [PageController::class, 'tests'])->name('tests');
+    Route::get('/passer-test-{id}', [PageController::class, 'passer'])->name('passer-test');
+    Route::post('/calculer-resultat', [PageController::class, 'calculerResultat'])->name('calculer-resultat');
   });
 
   Route::middleware('teacher')->group(function () {
     Route::get('/mytests', [TestController::class, 'index'])->name('mytests');
     Route::get('/create', [TestController::class, 'create'])->name('create-test');
-    Route::get('/{id}', [TestController::class, 'edit'])->name('edit-test');
+    Route::get('/edit-test-{id}', [TestController::class, 'edit'])->name('edit-test');
     Route::post('/update-test', [TestController::class, 'update'])->name('update-test');
-    Route::get('/delete/{id}', [TestController::class, 'destroy'])->name('delete-test');
+    Route::get('/delete-{id}', [TestController::class, 'destroy'])->name('delete-test');
     Route::post('/save', [TestController::class, 'store'])->name('save-test');
   });
 
