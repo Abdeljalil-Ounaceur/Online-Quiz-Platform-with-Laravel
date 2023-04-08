@@ -59,6 +59,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/tests', [PageController::class, 'tests'])->name('tests');
     Route::get('/passer-test-{id}', [PageController::class, 'passer'])->name('passer-test');
     Route::post('/calculer-resultat', [ResultatController::class, 'store'])->name('calculer-resultat');
+    Route::get('/mes-resultats', [ResultatController::class, 'index'])->name('mes-resultats');
+    Route::get('/view-result-{id}', [ResultatController::class, 'show'])->name('view-result');
+    Route::get('/delete-result-{id}', [ResultatController::class, 'destroy'])->name('delete-result');
   });
 
   Route::middleware('teacher')->group(function () {

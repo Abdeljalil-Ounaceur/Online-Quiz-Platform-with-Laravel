@@ -9,6 +9,21 @@ use Illuminate\Http\Request;
 
 class ResultatController extends Controller
 {
+
+  public function index()
+  {
+    return view('pages.candidat.mes-resultats', [
+      'resultats' =>
+      Resultat::where('id_user', auth()->user()->id)->orderBy('created_at', 'desc')->get()
+    ]);
+  }
+
+  public function show($id)
+  {
+    return view('pages.candidat.view-result', [
+      'resultat' => Resultat::findOrFail($id)
+    ]);
+  }
   public function store(Request $request)
   {
     $test = Test::findOrFail($request->idTest);
@@ -38,6 +53,7 @@ class ResultatController extends Controller
     }
 
     $result = new Resultat();
+    $result->id_user = auth()->user()->id;
     $result->id_test = $test->id;
     $result->score = $score;
     $result->save();
@@ -47,6 +63,12 @@ class ResultatController extends Controller
       $choixCourant->save();
     }
 
-    return 'success';
+    return redirect('mes-resultats');
+  }
+
+  public function destroy($id)
+  {
+    Resultat::findOrFail($id)->delete();
+    return redirect('mes-resultats');
   }
 }

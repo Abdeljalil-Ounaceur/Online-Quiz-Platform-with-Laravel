@@ -65,4 +65,9 @@ class User extends Authenticatable
   {
     return $this->hasMany(Test::class, 'user_id');
   }
+
+  public function resultats()
+  {
+    return $this->hasMany(Resultat::class, 'id_user');
+  }
 }

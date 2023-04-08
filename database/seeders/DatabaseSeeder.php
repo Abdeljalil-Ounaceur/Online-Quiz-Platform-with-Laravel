@@ -23,5 +23,23 @@ class DatabaseSeeder extends Seeder
       'user_type' => 'admin',
       'password' => bcrypt('secret')
     ]);
+
+    DB::table('users')->insert([
+      'username' => 'teacher',
+      'firstname' => 'Teacher',
+      'lastname' => 'Teacher',
+      'email' => 'tea@cher.com',
+      'user_type' => 'teacher',
+      'password' => bcrypt('teacher')
+    ]);
+
+    DB::table('users')->insert([
+      'username' => 'candidat',
+      'firstname' => 'Candidat',
+      'lastname' => 'Candidat',
+      'email' => 'candi@dat.com',
+      'user_type' => 'candidat',
+      'password' => bcrypt('candidat')
+    ]);
   }
 }
