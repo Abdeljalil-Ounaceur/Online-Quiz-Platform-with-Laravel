@@ -23,13 +23,15 @@
                 <ul id="questions" class="list-group">
                   @php($i=1)
                   @foreach ($test->questions as $question)
-                  @php($k=1)
-                  @foreach($question->reponses as $reponse)
-                    @if(!$reponse->estCorrecte)
-                      @break
-                    @php($k++)
-                    @endif
-                  @endforeach
+                  <?php
+                  $k = 1;
+                  foreach ($question->reponses as $reponse) {
+                    if ($reponse->estCorrecte) {
+                      break;
+                    }
+                    $k++;
+                  }
+                  ?>
                   <li id="question {{$i}}" class="list-group-item pb-4 mb-2" style="background-color: lightgray" >
                     <label for="question text {{$i}}">Question {{$i}}</label>
                     <input type="text" id="question text {{$i}}" class="form-control" name="question text {{$i}}" value='{{$question->text}}'><br>

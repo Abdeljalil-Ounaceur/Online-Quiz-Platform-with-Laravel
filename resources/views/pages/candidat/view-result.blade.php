@@ -8,11 +8,11 @@
         }
       </style>
       <div class="container-fluid py-4">
-        <form method="POST" action="{{route('calculer-resultat')}}" >
+        <form method="GET" action="{{route('mes-resultats')}}" >
           {{$test = $resultat->test}}
           
           @csrf
-          @method('POST')
+          @method('GET')
           <div class="col-12 mt-4 mx-auto">
             <div class="card">
               <div class="card-header pb-0 px-3">
@@ -49,7 +49,7 @@
                   @php($i++)
                   @endforeach
                 </ul>
-                <button class="btn btn-outline-dark m-2" type="submit" {{route('mes-resultats')}}>Back</button>
+                <button class="btn btn-outline-dark m-2">Back</button>
           </div>
         </div>
       </div>
