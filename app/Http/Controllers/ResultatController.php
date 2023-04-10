@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Resultat;
-use App\Models\Resultat_Choix;
+use App\Models\Choix;
 use App\Models\Test;
 use Illuminate\Http\Request;
 
@@ -40,7 +40,7 @@ class ResultatController extends Controller
     foreach ($keys as $key) {
       $n_ans = intval(explode('_', $key)[2]);
 
-      $choix[$i] = new Resultat_Choix();
+      $choix[$i] = new Choix();
       $choix[$i]->question = $i + 1;
       $choix[$i]->choix = $n_ans;
 

@@ -22,10 +22,10 @@ class Resultat extends Model
 
   public function user()
   {
-    return $this->belongsTo(Resultat_Choix::class, 'id_user');
+    return $this->belongsTo(User::class, 'id_user');
   }
   public function choix()
   {
-    return $this->hasMany(Resultat_Choix::class, 'id_resultat');
+    return $this->hasMany(Choix::class, 'id_resultat');
   }
 }
