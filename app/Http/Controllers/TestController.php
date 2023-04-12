@@ -14,10 +14,10 @@ class TestController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
+
+
   public function index()
   {
-    $id  =  auth()->user()->id;
-    return view("pages.teacher.mytests", ['tests' => Test::where('user_id', $id)->orderBy('created_at', 'desc')->get()]);
   }
 
   /**
@@ -27,7 +27,7 @@ class TestController extends Controller
    */
   public function create()
   {
-    return view('pages.teacher.create-test');
+    //
   }
 
   /**
@@ -77,7 +77,7 @@ class TestController extends Controller
    * @param  \App\Models\Test  $test
    * @return \Illuminate\Http\Response
    */
-  public function show(Test $test)
+  public function show($id)
   {
     //
   }
@@ -90,7 +90,7 @@ class TestController extends Controller
    */
   public function edit($id)
   {
-    return  view('pages.teacher.edit-test', ['test' => Test::findOrFail($id)]);
+    //
   }
 
   /**

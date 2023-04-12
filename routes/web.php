@@ -26,38 +26,45 @@ use App\Http\Controllers\ChangePassword;
 use App\Http\Controllers\ResultatController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CandidatController;
+use App\Http\Controllers\TeacherController;
 
 
 
 Route::get('/', function () {
   return redirect('/dashboard');
 })->middleware('auth');
-Route::get('/register', [RegisterController::class, 'create'])->middleware('guest')->name('register');
-Route::post('/register', [RegisterController::class, 'store'])->middleware('guest')->name('register.perform');
-Route::get('/login', [LoginController::class, 'show'])->middleware('guest')->name('login');
-Route::post('/login', [LoginController::class, 'login'])->middleware('guest')->name('login.perform');
-Route::get('/reset-password', [ResetPassword::class, 'show'])->middleware('guest')->name('reset-password');
-Route::post('/reset-password', [ResetPassword::class, 'send'])->middleware('guest')->name('reset.perform');
-Route::get('/change-password', [ChangePassword::class, 'show'])->middleware('guest')->name('change-password');
-Route::post('/change-password', [ChangePassword::class, 'update'])->middleware('guest')->name('change.perform');
-Route::get('/dashboard', [UserController::class, 'index'])->name('home')->middleware('auth');
+
+Route::middleware('guest')->group(function () {
+  Route::get('/register', [RegisterController::class, 'create'])->name('register');
+  Route::post('/register', [RegisterController::class, 'store'])->name('register.perform');
+  Route::get('/login', [LoginController::class, 'show'])->name('login');
+  Route::post('/login', [LoginController::class, 'login'])->name('login.perform');
+  Route::get('/reset-password', [ResetPassword::class, 'show'])->name('reset-password');
+  Route::post('/reset-password', [ResetPassword::class, 'send'])->name('reset.perform');
+  Route::get('/change-password', [ChangePassword::class, 'show'])->name('change-password');
+  Route::post('/change-password', [ChangePassword::class, 'update'])->name('change.perform');
+});
+
 Route::get('/useri', function () {
   return auth()->user();
 });
 
 Route::group(['middleware' => 'auth'], function () {
+  Route::get('/dashboard', [UserController::class, 'index'])->name('home');
   Route::get('/profile', [UserProfileController::class, 'show'])->name('profile');
   Route::post('/profile', [UserProfileController::class, 'update'])->name('profile.update');
 
   Route::middleware('admin')->group(function () {
-    Route::get('/user-management', [PageController::class, 'userManagement']);
-    Route::post('/user-management/{id}', [UserController::class, 'edit'])->name('user.edit');
-    Route::delete('/user-management/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+    Route::get('/user-management', [AdminController::class, 'userManagement']);
+    Route::get('/user-edit-{id}', [UserController::class, 'edit'])->name('user.edit');
+    Route::get('/user-delete-{id}', [UserController::class, 'destroy'])->name('user.destroy');
   });
 
   Route::middleware('candidat')->group(function () {
-    Route::get('/tests', [PageController::class, 'tests'])->name('tests');
-    Route::get('/passer-test-{id}', [PageController::class, 'passer'])->name('passer-test');
+    Route::get('/tests', [CandidatController::class, 'listTests'])->name('tests');
+    Route::get('/passer-test-{id}', [CandidatController::class, 'passTest'])->name('passer-test');
     Route::post('/calculer-resultat', [ResultatController::class, 'store'])->name('calculer-resultat');
     Route::get('/mes-resultats', [ResultatController::class, 'index'])->name('mes-resultats');
     Route::get('/view-result-{id}', [ResultatController::class, 'show'])->name('view-result');
@@ -65,12 +72,12 @@ Route::group(['middleware' => 'auth'], function () {
   });
 
   Route::middleware('teacher')->group(function () {
-    Route::get('/mytests', [TestController::class, 'index'])->name('mytests');
-    Route::get('/create', [TestController::class, 'create'])->name('create-test');
-    Route::get('/edit-test-{id}', [TestController::class, 'edit'])->name('edit-test');
+    Route::get('/mytests', [TeacherController::class, 'listTests'])->name('mytests');
+    Route::get('/create-test', [TeacherController::class, 'createTest'])->name('create-test');
+    Route::get('/edit-test-{id}', [TeacherController::class, 'editTest'])->name('edit-test');
     Route::post('/update-test', [TestController::class, 'update'])->name('update-test');
-    Route::get('/delete-{id}', [TestController::class, 'destroy'])->name('delete-test');
-    Route::post('/save', [TestController::class, 'store'])->name('save-test');
+    Route::get('/delete-test-{id}', [TestController::class, 'destroy'])->name('delete-test');
+    Route::post('/store-test', [TestController::class, 'store'])->name('save-test');
   });
 
 

@@ -36,23 +36,17 @@
                   </div>
                 </td>
                 <td>
-                  <p class="text-sm font-weight-bold mb-0">{{$user->username === "admin" ? "Admin" : "Member"}}</p>
+                  <p class="text-sm font-weight-bold mb-0">{{ ucfirst($user->user_type)}}</p>
                 </td>
                 <td class="align-middle text-center text-sm">
                   <p class="text-sm font-weight-bold mb-0">{{$user->created_at ?? '-'}}</p>
                 </td>
                 <td class="align-middle text-end">
                   <div class="d-flex px-3 py-1 justify-content-center align-items-center">
-                    <form action="{{route('user.edit',['id' => $user->id])}}" method="POST" style="display: inline-block;">
-                      @csrf
-                      @method('POST')
-                    <button type="submit" class="btn btn-light mx-2 font-weight-bold mb-0">Edit</button>
-                    </form>
-                    <form action="{{route('user.destroy',['id' => $user->id])}}" method="post" style="display: inline-block;">
-                      @csrf
-                      @method('DELETE')
-                     <button type=submit" class="btn btn-light mx-2 font-weight-bold mb-0">Delete</button>
-                    </form>
+                    <a href="{{route('user.edit',['id' => $user->id])}}"
+                      class="btn btn-light mx-2 font-weight-bold mb-0">Edit</a>
+                    <a href="{{route('user.destroy',['id' => $user->id])}}"" class=" btn btn-light mx-2 font-weight-bold
+                      mb-0">Delete</a>
                   </div>
                 </td>
               </tr>
