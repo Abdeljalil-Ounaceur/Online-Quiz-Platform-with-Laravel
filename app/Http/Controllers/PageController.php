@@ -31,26 +31,9 @@ class PageController extends Controller
 
     return abort(404);
   }
-
-  public function userManagement()
-  {
-    return view("pages.admin.user-management", [
-      'users' => User::all()
-    ]);
-  }
-
-  public function tests()
-  {
-    return view("pages.candidat.tests", ['tests' => Test::orderBy('created_at', 'desc')->get()]);
-  }
-
-  public function passer($id)
-  {
-    return view("pages.candidat.passer-test", ['test' => Test::findOrFail($id)]);
-  }
-
   public function view($id)
   {
     return view("pages.candidat.view-quiz", ['test' => Test::findOrFail($id)]);
   }
 }
+

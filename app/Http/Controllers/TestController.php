@@ -14,10 +14,10 @@ class TestController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
+
+
   public function index()
   {
-    $id  =  auth()->user()->id;
-    return view("pages.teacher.mytests", ['tests' => Test::where('user_id', $id)->orderBy('created_at', 'desc')->get()]);
   }
 
   /**
@@ -27,7 +27,7 @@ class TestController extends Controller
    */
   public function create()
   {
-    return view('pages.teacher.create-test');
+    //
   }
 
   /**
@@ -45,6 +45,7 @@ class TestController extends Controller
     $test->description = $request->description;
     $test->save();
 
+
     $keys = array_keys($request->all());
     $questionKeys = array_values(preg_grep("/^question_/", $keys));
 
@@ -55,15 +56,20 @@ class TestController extends Controller
       $question->text = $request[$quest_key];
       $question->save();
 
+
       $pattern = "/^answer_$i/";
       $currentAnswerKeys = array_values(preg_grep($pattern, $keys));
+      $correct_answer = intval($request["radio_" . $i]);
+
+      $j = 1;
       foreach ($currentAnswerKeys as $ans_key) {
-        $rest =  substr($ans_key, 6);
         $answer = new Reponse();
         $answer->question_id = $question->id;
         $answer->text = $request[$ans_key];
-        $answer->estCorrecte = isset($request["radio" . $rest]);
+        $answer->estCorrecte = ($j == $correct_answer);
+
         $answer->save();
+        $j++;
       }
       $i++;
     }
@@ -77,7 +83,7 @@ class TestController extends Controller
    * @param  \App\Models\Test  $test
    * @return \Illuminate\Http\Response
    */
-  public function show(Test $test)
+  public function show($id)
   {
     //
   }
@@ -90,7 +96,7 @@ class TestController extends Controller
    */
   public function edit($id)
   {
-    return  view('pages.teacher.edit-test', ['test' => Test::findOrFail($id)]);
+    //
   }
 
   /**
