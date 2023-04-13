@@ -62,6 +62,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/mes-resultats', [ResultatController::class, 'index'])->name('mes-resultats');
     Route::get('/view-result-{id}', [ResultatController::class, 'show'])->name('view-result');
     Route::get('/delete-result-{id}', [ResultatController::class, 'destroy'])->name('delete-result');
+    Route::get('/view-test-{id}', [PageController::class, 'view'])->name('view-test');
   });
 
   Route::middleware('teacher')->group(function () {

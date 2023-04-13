@@ -7,11 +7,13 @@
           
           @csrf
           @method('POST')
-          <input hidden name="idTest" id="idTest" value="{{$test->id}}" />
+          <input hidden name="idTest" id="idTest" value="{{$test->id}}"/>
           <div class="col-12 mt-4 mx-auto">
             <div class="card">
               <div class="card-header pb-0 px-3">
-                <h6 class="mb-0">{{$test->titre}}</h6>
+                <h5 class="mb-0">{{$test->titre}}</h5><br>
+                <h6>Good luck!</h6>
+                <hr>
               </div>
               <div class="card-body pt-4 p-3">
                 <ul id="questions" class="list-group">
@@ -37,7 +39,7 @@
                   @php($i++)
                   @endforeach
                 </ul>
-                <button class="btn btn-primary m-2" type="submit">Finish</button>
+                <button class="btn btn-primary m-2 btn-sm" type="submit">Finish</button>
           </div>
           <script>
           function changeSelectedRadioButton(rb){
@@ -55,6 +57,5 @@
         </div>
       </div>
     </form>
-    @include('layouts.footers.auth.footer')
   </div>
 @endsection

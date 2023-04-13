@@ -1,13 +1,13 @@
-@extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
+@extends('layouts.app', ['class' => 'g-sidenav-show bg-yellow-100'])
 
 @section('content')
 @include('layouts.navbars.auth.topnav', ['title' => 'Your Profile'])
-<div class="card shadow-lg mx-4 mt-5">
+<div class="card shadow-lg mx-4 mt-9">
   <div class="card-body p-3">
     <div class="row gx-4">
       <div class="col-auto">
         <div class="avatar avatar-xl position-relative">
-          <img src="/img/team-1.jpg" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+          <img src="/img/team-2.jpg" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
         </div>
       </div>
       <div class="col-auto my-auto">
@@ -50,7 +50,7 @@
 <div id="alert">
   @include('components.alert')
 </div>
-<div class="container-fluid py-4">
+<div class="container-fluid py-3">
   <div class="row">
     <div class="col-12">
       <div class="card">
@@ -132,6 +132,6 @@
         </form>
       </div>
     </div>
-    @include('layouts.footers.auth.footer')
   </div>
+</div>
   @endsection

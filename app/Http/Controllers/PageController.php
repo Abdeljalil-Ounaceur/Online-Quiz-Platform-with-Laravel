@@ -48,4 +48,9 @@ class PageController extends Controller
   {
     return view("pages.candidat.passer-test", ['test' => Test::findOrFail($id)]);
   }
+
+  public function view($id)
+  {
+    return view("pages.candidat.view-quiz", ['test' => Test::findOrFail($id)]);
+  }
 }
