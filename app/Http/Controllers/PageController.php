@@ -31,4 +31,9 @@ class PageController extends Controller
 
     return abort(404);
   }
+  public function view($id)
+  {
+    return view("pages.candidat.view-quiz", ['test' => Test::findOrFail($id)]);
+  }
 }
+
