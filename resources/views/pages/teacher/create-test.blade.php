@@ -19,23 +19,22 @@
             <textarea type="text" id="description" rows="4" class="form-control" name="description"></textarea>
           </div>
           <ul id="questions" class="list-group">
-            <li id="question 1" class="list-group-item pb-4 mb-2" style="background-color: lightgray">
-              <label for="question text 1">Question 1</label>
-              <input type="text" id="question text 1" class="form-control" name="question text 1"><br>
-              <label for="answerList 1">Answers</label>
-              {{-- <input hidden id="radio selected 1" name="radio 1 1" value="on" /> --}}
+            <li id="question 1" class="list-group-item pb-4 mb-4">
+              <label>Question 1</label>
+              <input type="text" id="question text 1" class="form-control mb-4" name="question text 1">
+              <label>Answers</label>
               <ol type="a" id="answerList 1">
-                <li class="list-group-item" style="background-color: #dddddd">
-                  <label for="answer 1 1">1. </label>
-                  <input type="radio" id="radio 1 1" class="mx-2" name="radio 1" value="1" checked
-                    onchange="changeSelectedRadioButton(this)">
-                  <input type="text" id="answer 1 1" class="" name="answer 1 1">
-                  <button class="mx-3" type="button" onclick="addAnswer(this)">+</button>
+                <li class="list-group-item">
+                  <label>1. </label>
+                  <input type="radio" class="mx-2" name="radio 1" value="1" checked>
+                  <input type="text" id="answer 1 1" class="me-n1" name="answer 1 1">
+                  <button class="badge text-success mx-1 bg-light border-1" type="button"
+                    onclick="addAnswer(this)">+</button>
                 </li>
               </ol>
             </li>
           </ul>
-          @include('javascript-help.addToTest')
+          @include('js-css-help.addToTest')
         </div>
       </div>
     </div>

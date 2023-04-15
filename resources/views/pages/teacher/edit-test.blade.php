@@ -24,22 +24,31 @@
           <ul id="questions" class="list-group">
             @php($i=1)
             @foreach ($test->questions as $question)
-            <li id="question {{$i}}" class="list-group-item pb-4 mb-2" style="background-color: lightgray">
-              <label for="question text {{$i}}">Question {{$i}}</label>
+            <li id="question {{$i}}" class="list-group-item pb-4 mb-4">
+              @if (count($test->questions) > 1)
+              <button style=" float: right;" class="badge text-danger mt-n4 me-n2 bg-light border-1" type="button"
+                onclick="removeQuestion(this)">x</button>
+              @endif
+              <label>Question {{$i}}</label>
               <input type="text" id="question text {{$i}}" class="form-control" name="question text {{$i}}"
-                value='{{$question->text}}'><br>
-              <label for="answerList {{$i}}">Answers</label>
+                value='{{$question->text}}'>
+              <label>Answers</label>
               <ol type="a" id="answerList {{$i}}">
                 @php($j = 1)
                 @foreach ($question->reponses as $reponse)
-                <li class="list-group-item" style="background-color: #dddddd">
-                  <label for="answer {{$i}} {{$j}}">{{$j}}. </label>
+                <li class="list-group-item">
+                  <label>{{$j}}. </label>
                   <input type="radio" id="radio {{$i}} {{$j}}" class="mx-2" name="radio {{$i}}" value="{{$j}}"
                     {{$reponse->estCorrecte ? 'checked' : ''}}>
                   <input type="text" id="answer {{$i}} {{$j}}" class="" name="answer {{$i}} {{$j}}"
                     value='{{$reponse->text}}'">
-                        @if ($loop->last)
-                            <button class=" mx-3" type="button" onclick="addAnswer(this)">+</button>
+                  @if (count($question->reponses) > 1)
+                  <button class=" badge text-danger mx-1 bg-light border-1" type="button"
+                    onclick="removeAnswer(this)">-</button>
+                  @endif
+                  @if ($loop->last)
+                  <button class=" badge text-success mx-1 bg-light border-1" type="button"
+                    onclick="addAnswer(this)">+</button>
                   @endif
                 </li>
                 @php($j++)
@@ -49,7 +58,7 @@
             @php($i++)
             @endforeach
           </ul>
-          @include('javascript-help.addToTest')
+          @include('js-css-help.addToTest')
         </div>
       </div>
     </div>
