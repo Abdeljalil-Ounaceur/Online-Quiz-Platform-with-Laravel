@@ -11,7 +11,7 @@ class Reponse extends Model
 
   protected $fillable = [
     'question_id',
-    'reponse',
+    'text',
     'estCorrecte'
   ];
 

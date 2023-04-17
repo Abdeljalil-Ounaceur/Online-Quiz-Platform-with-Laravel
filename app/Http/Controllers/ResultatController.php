@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Resultat;
-use App\Models\Resultat_Choix;
+use App\Models\Choix;
 use App\Models\Test;
 use Illuminate\Http\Request;
 
@@ -31,16 +31,16 @@ class ResultatController extends Controller
     $choix = [];
 
     $keys = array_keys($request->all());
-    $keys = array_values(preg_grep("/^radio_\d_/", $keys));
+    $keys = array_values(preg_grep("/^radio_/", $keys));
 
     $score =  0;
 
 
     $i = 0;
     foreach ($keys as $key) {
-      $n_ans = intval(explode('_', $key)[2]);
+      $n_ans = intval($request[$key]);
 
-      $choix[$i] = new Resultat_Choix();
+      $choix[$i] = new Choix();
       $choix[$i]->question = $i + 1;
       $choix[$i]->choix = $n_ans;
 

@@ -36,7 +36,7 @@
                   </div>
                 </td>
                 <td>
-                  <p class="text-sm font-weight-bold mb-0">{{$user->username === "admin" ? "Admin" : "Member"}}</p>
+                  <p class="text-sm font-weight-bold mb-0">{{ ucfirst($user->user_type)}}</p>
                 </td>
                 <td class="align-middle text-center text-sm">
                   <p class="text-sm font-weight-bold mb-0">{{$user->created_at ?? '-'}}</p>

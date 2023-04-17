@@ -47,22 +47,22 @@
                         <input type="radio" id="radio {{$i}} {{$j}}" class="mx-2" name="radio {{$i}}" {{$reponse->estCorrecte ? 'checked' : ''}} onchange="changeSelectedRadioButton(this)">
                         <input type="text" id="answer {{$i}} {{$j}}" class="" name="answer {{$i}} {{$j}}" value='{{$reponse->text}}'">
                         @if ($loop->last)
-                            <button class="mx-3" type="button" onclick="addAnswer(this)">+</button>
-                        @endif
-                      </li>
-                      @php($j++)
-                      @endforeach
-                    </ol>
-                  </li>
-                  @php($i++)
-                  @endforeach
-                </ul>
-            @include('javascript-help.addToTest')
-          </div>
+                            <button class=" mx-3" type="button" onclick="addAnswer(this)">+</button>
+                  @endif
+                </li>
+                @php($j++)
+                @endforeach
+              </ol>
+            </li>
+            @php($i++)
+            @endforeach
+          </ul>
+          @include('javascript-help.addToTest')
         </div>
       </div>
-      @include('components.test-footer')
-    </form>
-    @include('layouts.footers.auth.footer')
-  </div>
+    </div>
+    @include('components.test-footer')
+  </form>
+  @include('layouts.footers.auth.footer')
+</div>
 @endsection
