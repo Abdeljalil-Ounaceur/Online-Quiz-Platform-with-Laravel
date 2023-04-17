@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
       'lastname' => 'Teacher',
       'email' => 'tea@cher.com',
       'user_type' => 'teacher',
-      'password' => bcrypt('teacher')
+      'password' => bcrypt('secret')
     ]);
 
     DB::table('users')->insert([
@@ -39,7 +39,7 @@ class DatabaseSeeder extends Seeder
       'lastname' => 'Candidat',
       'email' => 'candi@dat.com',
       'user_type' => 'candidat',
-      'password' => bcrypt('candidat')
+      'password' => bcrypt('secret')
     ]);
   }
 }

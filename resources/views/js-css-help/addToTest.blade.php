@@ -18,8 +18,7 @@
       btn.parentElement.removeChild(btn);
       
       if(answerList.childElementCount == 1){
-        answerList.children[0].innerHTML +=
-         "<button class=\"badge text-danger mx-1 bg-light border-1\" type=\"button\" onclick=\"removeAnswer(this)\">-</button>";
+        answerList.children[0].appendChild(btnMinusElement());
       }
       
       answerList.appendChild(li);
@@ -29,7 +28,7 @@
     const i = btn.previousElementSibling.id.split(" ")[2];
     answerOL = btn.parentElement.parentElement;
     if( i == answerOL.childElementCount){ //if this is the last answer of the current question
-      answerOL.children[i-2].innerHTML += "<button class=\"badge text-success mx-1 bg-light border-1\" type=\"button\" onclick=\"addAnswer(this)\">+</button>";
+      answerOL.children[i-2].appendChild(btnPlusElement());
     }
     answerOL.children[i-1].remove();
 
@@ -69,9 +68,8 @@
     li.id = id_quest;
 
     if(questionList.childElementCount == 1){
-        questionList.children[0].innerHTML = ""+
-         "<button style=\"float: right;\" class=\"badge text-danger mt-n4 me-n2 bg-light border-1\" type=\"button\" onclick=\"removeQuestion(this)\">x</button>" +
-         questionList.children[0].innerHTML ;
+      let firstQuestion = questionList.children[0];
+        firstQuestion.insertBefore(btnXElement(), firstQuestion.firstChild);
       }
 
     questionList.appendChild(li);
@@ -100,5 +98,31 @@
   if(questionOL.childElementCount == 1){
       questionOL.children[0].children[0].remove();
   }
+  }
+
+
+
+
+
+  //secondary functions just to make the code more readable and efficient
+  function htmlToElement(html) {
+    var template = document.createElement('template');
+    html = html.trim(); // Never return a text node of whitespace as the result
+    template.innerHTML = html;
+    return template.content.firstChild;
+  }
+  function htmlToElements(html) {
+    var template = document.createElement('template');
+    template.innerHTML = html;
+    return template.content.childNodes;
+}
+  function btnPlusElement(){
+    return htmlToElement("<button class=\"badge text-success mx-1 bg-light border-1\" type=\"button\" onclick=\"addAnswer(this)\">+</button>");
+  }
+  function btnMinusElement(){
+    return htmlToElement("<button class=\"badge text-danger mx-1 bg-light border-1\" type=\"button\" onclick=\"removeAnswer(this)\">-</button>");
+  }
+  function btnXElement(){
+    return htmlToElement("<button style=\"float: right;\" class=\"badge text-danger mt-n4 me-n2 bg-light border-1\" type=\"button\" onclick=\"removeQuestion(this)\">x</button>");
   }
 </script>

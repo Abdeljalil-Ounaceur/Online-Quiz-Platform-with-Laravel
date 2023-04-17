@@ -42,10 +42,10 @@
                   @php($i++)
                   @endforeach
                 </ul>
-
                 <button class=" btn btn-primary m-2 btn-sm" type="submit">Finish</button>
         </div>
       </div>
+      @include('js-css-help.table-style')
   </form>
 </div>
 
