@@ -14,6 +14,7 @@ class Test extends Model
     'user_id',
     'title',
     'description',
+    'image'
   ];
 
   public function owner()
@@ -25,4 +26,5 @@ class Test extends Model
   {
     return $this->hasMany(Question::class, 'test_id');
   }
+
 }

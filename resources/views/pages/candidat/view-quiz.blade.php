@@ -17,8 +17,8 @@
               <a class="btn btn-primary btn-sm ms-auto" href="{{route('passer-test', ['id' => $test->id])}}">Pass</a>
             </div>
             <div class="row">
-              <div class="col-md-12">
-                <img src="/img/sdc.jpg" alt="" class="img-fluid p-5">
+              <div class="col-md-12 align-items-center">
+                <img class="card-img-top mb-4 d-inline-flex w-100 h-100" src="{{ asset('test_images/'.$test->image) }}" alt="test image">
                 <h6>{{$test->description}}</h6>
               </div>
             </div>

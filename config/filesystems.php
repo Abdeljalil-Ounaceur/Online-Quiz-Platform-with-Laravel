@@ -44,6 +44,21 @@ return [
             'throw' => false,
         ],
 
+
+        'test_images' => [
+            'driver' => 'local',
+            'root' => public_path('test_images'),
+            'url' => env('APP_URL').'/public',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
+        'links' => [
+            public_path('storage') => storage_path('app/public'),
+            public_path('test_images') => storage_path('app/test_images'),
+        ],
+
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

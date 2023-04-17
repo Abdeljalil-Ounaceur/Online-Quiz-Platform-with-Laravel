@@ -5133,7 +5133,11 @@ textarea.form-control-lg {
 .card-img,
 .card-img-top,
 .card-img-bottom {
-  width: 100%;
+  width: 350px;
+  height: 180px;
+  object-fit: cover;
+  position: sticky;
+  top: 0;
 }
 
 .card-img,
@@ -9498,7 +9502,7 @@ textarea.form-control-lg {
 .macard {
   box-sizing: border-box;
   width: 320px;
-  height: 330px;
+  height: 340px;
   background: rgb(260, 250, 230);
   border: 1px solid white;
   box-shadow: 1px 2px 15px rgba(0, 0, 0, 0.22);
@@ -9528,7 +9532,7 @@ textarea.form-control-lg {
 
 
 .bg-primary {
-  background-color: #D27685 !important;
+  background-color: #e85e56 !important;
 }
 
 .bg-secondary {
@@ -9564,7 +9568,7 @@ background-color: #f5365c !important;
 }
 
 .bg-somon {
-  background-color: #4C3A51;
+  background-color: #494949;
 }
 
 .bg-cyan-100 {
@@ -9589,6 +9593,10 @@ background-color: #f5365c !important;
 
 .bg-yellow-100 {
   background-color: rgb(260, 250, 230);
+}
+
+.bg-yellow-200 {
+  background-color: #f4e9dc;
 }
 
 .bg-bege{
