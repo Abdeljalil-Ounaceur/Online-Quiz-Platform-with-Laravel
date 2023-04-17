@@ -13,13 +13,13 @@
         @foreach ($tests as $test)
         <a href="{{route('view-test', ['id' => $test->id])}}">
           <div class="macard d-inline-block overflow-hidden">
-            <img class="card-img-top sticky-top mb-4 object-fit-fill d-inline-flex" src="/img/hq720.webp">
+            <img class="card-img-top sticky-top mb-4 object-fit-fill d-inline-flex" src="{{ asset('test_images/'.$test->image) }}" alt="test image">
             <h6 class="mb-3 text-sm text-center">{{$test->titre}}</h6>
           <div class="w-90">
             <span class="mb-2 m-3 text-xs">Author: <span class="text-dark ml-3 font-weight-bold">{{$test->owner->username}}</span></span><br>
             <span class="mb-2 text-xs m-3">Description: <span class="text-dark ml-3 font-weight-bold">
             @if($test->description > 50)
-                {{substr($test->description, 0, 30)}}...
+                {{substr($test->description, 0, 25)}}...
             @else
                 {{$test->description}}
             @endif</span></span>

@@ -5,21 +5,21 @@
 <div class="container-fluid py-4 align-items-center">
   <div class="col-14 mt-6 mx-auto align-items-center">
     <div class="card align-items-center">
-      <div class="card-header p-5 pb-3 px-2 d-inline">
-        <h5 style=" float:left" class="m-2">My Test List</h5>
-        <a class="btn btn-sm btn-outline-success d-flex" href="{{route('create-test')}}">add Test</a>
+      <div class="card-header p-5 pb-3 px-2" style="position: relative; left:40%">
+        <a  class="btn btn-sm btn-outline-success d-flex" href="{{route('create-test')}}">add Test</a>
       </div>
+      <h5 class="m-2">My Test List</h5>
       <div class="card-body pt-3 p-3 align-items-center justify-content-around">
         @isset($tests)
         @foreach ($tests as $test)
           <div class="macard d-inline-block overflow-hidden">
-            <img class="card-img-top sticky-top mb-4 object-fit-fill d-inline-flex" src="/img/hq720.webp">
+          <img class="card-img-top mb-4 d-inline-flex " src="{{ asset('test_images/'.$test->image) }}" alt="test image">
             <h6 class="mb-3 text-sm text-center">{{$test->titre}}</h6>
           <div class="w-90">
             <span class="mb-2 m-3 text-xs">Author: <span class="text-dark ml-3 font-weight-bold">{{$test->owner->username}}</span></span><br>
             <span class="mb-2 text-xs m-3">Description: <span class="text-dark ml-3 font-weight-bold">
             @if($test->description > 50)
-                {{substr($test->description, 0, 30)}}...
+                {{substr($test->description, 0, 25)}}...
             @else
                 {{$test->description}}
             @endif</span></span>

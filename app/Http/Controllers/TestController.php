@@ -39,10 +39,21 @@ class TestController extends Controller
   public function store(Request $request)
   {
 
+    if ($request->hasFile('file')) {
+      $file = $request->file('file');
+      $request->validate([
+        'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:10',
+      ]);
+      $imageName = time() . '.' . $request->file->extension();
+      $request->file = $imageName;
+      $file->move(public_path('test_images'), $imageName);    
+    }
+
     $test = new Test();
     $test->user_id = auth()->user()->id;
     $test->titre = $request->title;
     $test->description = $request->description;
+    $test->image = $request->file;
     $test->save();
 
     $keys = array_keys($request->all());

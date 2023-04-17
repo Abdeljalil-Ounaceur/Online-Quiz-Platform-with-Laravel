@@ -3,7 +3,7 @@
 @section('content')
 @include('layouts.navbars.auth.topnav', ['title' => 'My Tests'])
       <div class="container-fluid py-4">
-        <form method="POST" action="{{route('update-test')}}" >
+        <form method="POST" action="{{route('update-test')}}" enctype="multipart/form-data">
           
           <input hidden name="idTest" id="idTest" value="{{$test->id}}" />
           @csrf
@@ -19,6 +19,8 @@
                   <input type="text" id="title" class="form-control" name="title" value="{{$test->titre}}" />
                   <label for="description">Description</label>
                   <textarea type="text" id="description" rows="4" class="form-control" name="description">{{$test->description}}</textarea>
+                  <label for="file">Upload test image</label>
+                  <input type="file" name="file" id="file" class="form-control">
                 </div>
                 <ul id="questions" class="list-group">
                   @php($i=1)
