@@ -60,6 +60,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/user-management', [AdminController::class, 'userManagement']);
     Route::get('/user-edit-{id}', [UserController::class, 'edit'])->name('user.edit');
     Route::get('/user-delete-{id}', [UserController::class, 'destroy'])->name('user.destroy');
+    Route::get('/admin-dashboard', function () {
+      return view('pages.admin.dashboard');
+    })->name('admin-dashboard');
   });
 
   Route::middleware('candidat')->group(function () {
