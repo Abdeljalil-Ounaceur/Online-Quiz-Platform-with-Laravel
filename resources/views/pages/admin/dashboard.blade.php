@@ -46,7 +46,7 @@
         </div>
       </div>
 
-      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <script src="./assets/js/plugins/chartjs.min.js"></script>
       <script>
         // Function to get last 10 days
         function get_last_10_days() {
@@ -227,20 +227,18 @@
             </script>
           </div>
           <div class="col-6">
-            <canvas id="result-dest"></canvas>
+            <canvas id="test-destr"></canvas>
             <script>
-              var results_notes = @json($results_notes);
-              var notes_names = Object.keys(results_notes).reverse();
-              var notes_stats = Object.values(results_notes).reverse();
+              var tests_notes = Object.values(@json($tests_notes)).reverse();
 
-              var ctx = document.getElementById('result-dest');
+              var ctx = document.getElementById('test-destr');
               var myChart = new Chart(
                 ctx, { type: 'bar',
-                  data: { labels: notes_names,
+                  data: { labels: ['Trivial', 'Easy', 'Fair', 'Moderate', 'Hard', 'Challenging'],
                     datasets: [
                       { 
-                        label: 'Results Stats',
-                        data: notes_stats,
+                        label: 'tests Destribution',
+                        data: tests_notes,
                         backgroundColor: [
                           'rgba(255, 99, 132, 0.2)',
                           'rgba(54, 162, 235, 0.2)',

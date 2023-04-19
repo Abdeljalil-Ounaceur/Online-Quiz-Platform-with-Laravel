@@ -31,36 +31,40 @@ class AdminController extends Controller
       $today_12_pm = clone $day_before;
     }
 
-    $results_notes  = array();
-    $results_notes['Fails']  =  0;
-    $results_notes['Okay']  =  0;
-    $results_notes['Not bad']  =  0;
-    $results_notes['Good']  =  0;
-    $results_notes['Very Good']  =  0;
-    $results_notes['Excellent']  =  0;
+    $tests_notes  = array_fill(0, 6, 0);
 
-    $results = Resultat::all();
-    foreach ($results as $result) {
-      $n_quest = count($result->test->questions);
-      $note = $result->score / $n_quest * 20;
+    $tests = Test::all();
+    foreach ($tests as $test) {
+      $note = 0;
+      $n_notes = 0;
+      $n_quest = count($test->questions);
+      foreach ($test->resultats as $result) {
+        $note += $result->score / $n_quest * 20;
+        $n_notes++;
+      }
+      if (!$n_notes) {
+        continue;
+      }
+      $note = $note / $n_notes;
+
       switch ($note) {
         case $note < 10:
-          $results_notes['Fails']++;
+          $tests_notes[0]++;
           break;
         case $note < 12:
-          $results_notes['Okay']++;
+          $tests_notes[1]++;
           break;
         case $note < 14:
-          $results_notes['Not bad']++;
+          $tests_notes[2]++;
           break;
         case $note < 16:
-          $results_notes['Good']++;
+          $tests_notes[3]++;
           break;
         case $note < 18:
-          $results_notes['Very Good']++;
+          $tests_notes[4]++;
           break;
         case $note <= 20:
-          $results_notes['Excellent']++;
+          $tests_notes[5]++;
           break;
       }
     }
@@ -71,12 +75,12 @@ class AdminController extends Controller
     return view('pages.admin.dashboard', [
       'teacher_count' => User::where('user_type', 'teacher')->count(),
       'candidat_count' => User::where('user_type', 'candidat')->count(),
-      'test_count' => User::count(),
+      'test_count' => Test::count(),
       'result_count' => Resultat::count(),
       'recent_data' => $recent_data,
       'tests_with_results' => Test::whereHas('resultats')->count(),
       'tests_without_results' => Test::whereDoesntHave('resultats')->count(),
-      'results_notes' => $results_notes
+      'tests_notes' => $tests_notes
 
     ]);
   }
