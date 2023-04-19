@@ -27,4 +27,8 @@ class Test extends Model
     return $this->hasMany(Question::class, 'test_id');
   }
 
+  public function resultats()
+  {
+    return $this->hasMany(Resultat::class, 'id_test');
+  }
 }

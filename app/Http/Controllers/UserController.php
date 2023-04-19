@@ -15,7 +15,7 @@ class UserController extends Controller
   public function index()
   {
     return match (auth()->user()->user_type) {
-      'admin' => redirect('/user-management'),
+      'admin' => redirect('/admin-dashboard'),
       'candidat' => redirect('/tests'),
       'teacher' => redirect('/mytests'),
     };

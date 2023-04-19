@@ -15,7 +15,7 @@
             <div class="card text-white bg-primary mb-3">
               <div class="card-body">
                 <h5 class="card-title">Total Teachers</h5>
-                <p class="card-text display-4">10</p>
+                <p class="card-text display-4">{{$teacher_count}}</p>
               </div>
             </div>
           </div>
@@ -23,7 +23,7 @@
             <div class="card text-white bg-success mb-3">
               <div class="card-body">
                 <h5 class="card-title">Total Candidates</h5>
-                <p class="card-text display-4">50</p>
+                <p class="card-text display-4">{{$candidat_count}}</p>
               </div>
             </div>
           </div>
@@ -31,7 +31,7 @@
             <div class="card text-white bg-warning mb-3">
               <div class="card-body">
                 <h5 class="card-title">Total Tests</h5>
-                <p class="card-text display-4">25</p>
+                <p class="card-text display-4">{{$test_count}}</p>
               </div>
             </div>
           </div>
@@ -39,7 +39,7 @@
             <div class="card text-white bg-danger mb-3">
               <div class="card-body">
                 <h5 class="card-title">Total Results</h5>
-                <p class="card-text display-4">42</p>
+                <p class="card-text display-4">{{$result_count}}</p>
               </div>
             </div>
           </div>
@@ -47,6 +47,20 @@
       </div>
 
       <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <script>
+        // Function to get last 10 days
+        function get_last_10_days() {
+          const days = [];
+          const date = new Date();
+          for (let i = 0; i < 10; i++) {
+            const day = date.getDate().toString().padStart(2, '0');
+            const month = (date.getMonth() + 1).toString().padStart(2, '0');
+            days.push(`${day}-${month}`);
+            date.setDate(date.getDate() - 1);
+          }
+          return days.reverse();
+        }
+      </script>
       <div class="container">
         <div class="row" id="charts-row">
           <!-- Column for line chart -->
@@ -59,13 +73,15 @@
                   // Get the context of the canvas element
         var ctx = document.getElementById("test-bar-chart").getContext("2d");
 
+        const recent_tests = Object.values( @json($recent_data['tests']));
+        console.log(recent_tests);
         // Create the line chart data
         var data = {
-          labels: ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7", "Day 8", "Day 9", "Day 10"],
+          labels: get_last_10_days(),
           datasets: [
             {
               label: "Tests Created",
-              data: [5, 3, 4, 6, 7, 8, 9, 10, 11, 12],
+              data: recent_tests,
               borderColor: "#007bff",
               backgroundColor: "rgba(0,123,255,0.2)",
               fill: true,
@@ -112,12 +128,15 @@
         var ctx = document.getElementById("result-bar-chart").getContext("2d");
 
         // Create the bar chart data
+        const recent_results = Object.values( @json($recent_data['results']));
+        console.log(recent_results);
+
         var data = {
-          labels: ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7", "Day 8", "Day 9", "Day 10"],
+          labels: get_last_10_days(),
           datasets: [
             {
               label: "Tests Passed",
-              data: [10, 15, 12, 18, 20, 22, 25, 28, 30, 32],
+              data: recent_results,
               backgroundColor: "#28a745",
             },
           ],
@@ -161,7 +180,7 @@
           var data = {
             labels: ['Candidates', 'Teachers'],
             datasets: [{
-              data: [78, 20],
+              data: [{{$teacher_count}}, {{$candidat_count}}],
               backgroundColor: ['#36A2EB', '#FFCE56']
             }]
           };
@@ -188,7 +207,7 @@
               const data2 = {
                 labels: ['Passed', 'Non Passed'],
                 datasets: [{
-                  data: [60, 40],
+                  data: [{{$tests_with_results}}, {{$tests_without_results}}],
                   backgroundColor: ['#4BC0C0', '#FF6384']
                 }]
               };
@@ -210,24 +229,30 @@
           <div class="col-6">
             <canvas id="result-dest"></canvas>
             <script>
+              var results_notes = @json($results_notes);
+              var notes_names = Object.keys(results_notes).reverse();
+              var notes_stats = Object.values(results_notes).reverse();
+
               var ctx = document.getElementById('result-dest');
               var myChart = new Chart(
                 ctx, { type: 'bar',
-                  data: { labels: ['Trivial', 'Easy', 'Moderate', 'Hard', 'Challenging' ],
+                  data: { labels: notes_names,
                     datasets: [
                       { 
-                        label: 'Tests Destribution',
-                        data: [5, 17, 41, 25, 10],
+                        label: 'Results Stats',
+                        data: notes_stats,
                         backgroundColor: [
                           'rgba(255, 99, 132, 0.2)',
                           'rgba(54, 162, 235, 0.2)',
                           'rgba(255, 206, 86, 0.2)',
+                          'rgba(221, 200, 100, 0.2)',
                           'rgba(75, 192, 192, 0.2)',
                           'rgba(153, 102, 255, 0.2)' ], 
                           borderColor: [ 
                             'rgba(255, 99, 132, 1)', 
                             'rgba(54, 162, 235, 1)', 
                             'rgba(255, 206, 86, 1)', 
+                            'rgba(221, 200, 100, 1)',
                             'rgba(75, 192, 192, 1)', 
                             'rgba(153, 102, 255, 1)'], 
                             borderWidth: 1 
