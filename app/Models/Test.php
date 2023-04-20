@@ -12,8 +12,9 @@ class Test extends Model
 
   protected $fillable = [
     'user_id',
-    'title',
+    'titre',
     'description',
+    'tags',
     'image'
   ];
 
@@ -25,6 +26,11 @@ class Test extends Model
   public function questions()
   {
     return $this->hasMany(Question::class, 'test_id');
+  }
+
+  public function tags()
+  {
+      return $this->belongsToMany(Tag::class, 'tag_test', 'test_id', 'tag_id');
   }
 
 }

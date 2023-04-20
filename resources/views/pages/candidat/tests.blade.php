@@ -6,7 +6,8 @@
   <div class="col-12 mt-4 mx-auto align-items-center">
     <div class="card align-items-center">
       <div class="card-header p-5 pb-3 px-2 d-inline align-items-center">
-        <h5 class="mb-0">Test List</h5>
+        <h1 class="mb-4 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl"><span class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">Test List</span></h1>
+{{-- <p class="text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">Here at Flowbite we focus on markets where technology, innovation, and capital can unlock long-term value and drive economic growth.</p> --}}
       </div>
       <div class="card-body pt-3 p-3 align-items-center justify-content-around">
         @isset($tests)
