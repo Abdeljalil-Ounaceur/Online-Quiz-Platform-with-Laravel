@@ -22,7 +22,6 @@ class TestController extends Controller
 
   public function index()
   {
-    return view('view-quiz');
   }
 
   /**
@@ -32,7 +31,7 @@ class TestController extends Controller
    */
   public function create()
   {
-    return view('create-test');
+    return view('view-quiz')->with('tags', $tags);
   }
 
   /**
@@ -66,6 +65,7 @@ class TestController extends Controller
     // $test = Test::create($input);
     // $test->tag($tags);
 
+    $test->save();
 
     $tags = $request->input('tags', []);
 
@@ -76,15 +76,13 @@ class TestController extends Controller
   
           foreach ($tags_array as $tag) {
               $new_tag = Tag::firstOrCreate(['name' => $tag]);
-              $thisTest = Test::find($test->id);
-              $thisTest->tags()->attach($new_tag, ['test_id' => $test->id]);
+              $test->tags()->attach($new_tag, ['test_id' => $test->id]);
           }
       }
   }
 
+  $test->save();
 
-
-    $test->save();
     $keys = array_keys($request->all());
     $questionKeys = array_values(preg_grep("/^question_/", $keys));
 
@@ -113,7 +111,7 @@ class TestController extends Controller
       $i++;
     }
 
-    return redirect('/mytests')->with('success', 'Test Inserted successfully')->route('view-test')->with('tags',$tags);
+    return redirect('/mytests')->with('success', 'Test Inserted successfully')->with('tags',$tags);
   }
 
   /**

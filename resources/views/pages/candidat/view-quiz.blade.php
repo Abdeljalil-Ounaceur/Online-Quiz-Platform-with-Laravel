@@ -20,12 +20,6 @@
                 <img class="mb-4 d-inline object-fit-cover img-fluid align-center" src="{{ asset('test_images/'.$test->image) }}" alt="test image">
             </div>
               <tr><h6> <div class="fw-light">Description:</div> {{$test->description}}</h6>
-              {{-- @foreach ($test->tags as $tag)
-                  <div class="post-tags mb-4">
-                      <strong>Tags : </strong>
-                      <span class="badge badge-info">{{ $tag->name }}</span>
-                  </div>
-              @endforeach --}}
           </div>
       </div>
     </div>
