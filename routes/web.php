@@ -48,7 +48,7 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::get('/useri', function () {
-  return auth()->user();
+  return view('pages.dashboard', ['hi' => 'ghabi']);
 });
 
 Route::group(['middleware' => 'auth'], function () {
@@ -57,7 +57,8 @@ Route::group(['middleware' => 'auth'], function () {
   Route::post('/profile', [UserProfileController::class, 'update'])->name('profile.update');
 
   Route::middleware('admin')->group(function () {
-    Route::get('/user-management', [AdminController::class, 'userManagement']);
+    Route::get('/user-management', [AdminController::class, 'user_management']);
+    Route::get('/admin-dashboard',  [AdminController::class, 'dashboard'])->name('admin-dashboard');
     Route::get('/user-edit-{id}', [UserController::class, 'edit'])->name('user.edit');
     Route::get('/user-delete-{id}', [UserController::class, 'destroy'])->name('user.destroy');
   });

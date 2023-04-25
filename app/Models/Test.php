@@ -33,4 +33,8 @@ class Test extends Model
       return $this->belongsToMany(Tag::class, 'tag_test', 'test_id', 'tag_id');
   }
 
+  public function resultats()
+  {
+    return $this->hasMany(Resultat::class, 'id_test');
+  }
 }
