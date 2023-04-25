@@ -67,12 +67,12 @@ class TestController extends Controller
 
     $test->save();
 
-    $tags = $request->input('tags', []);
-
+    $tags = $request->tags;
+    $tags = explode(",", $tags);
     if ($test) {
       if (is_array($tags)) {
           $tags_array = array_map('trim', $tags);
-          $tags_array = array_filter($tags_array);
+          // $tags_array = array_filter($tags_array);
   
           foreach ($tags_array as $tag) {
               $new_tag = Tag::firstOrCreate(['name' => $tag]);

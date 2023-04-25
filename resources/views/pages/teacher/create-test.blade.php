@@ -23,7 +23,8 @@
                         <div class="form-group">
                             <label>Tags : <span class="text-danger">*</span><span class="text-muted"></span></label>
                             <br>
-                            <input type="text" name="tags[]" class="form-control tags" id="tags" placeholder="Enter tags separated by commas">
+                            <input type="text" name="tags" class="form-control tags" id="tags"
+                                placeholder="Enter tags separated by commas">
                             <br>
                             @if ($errors->has('tags'))
                                 <span class="text-danger">{{ $errors->first('tags') }}</span>

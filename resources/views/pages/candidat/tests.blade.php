@@ -40,9 +40,7 @@
                                                 @endif
                                             </span></span>
                                     </div>
-                                    {{-- <div class="list-group-item border-0 col-5 p-15 mb-2 bg-yellow-100 border-radius-lg d-inline-block flex-column overflow-hidden">
-          <img class="card-img-top w-60 rounded sticky-top mb-4 object-fit-fill d-inline-flex" src="/img/sdc.jpg">
-        </div> --}}
+                                </div>
                         @endforeach
                     @endisset
                     </a>
