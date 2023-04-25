@@ -1,11 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Categories;
+use App\Models\Tag;
 
 use App\Models\Question;
 use App\Models\Reponse;
 use App\Models\Test;
 use Illuminate\Http\Request;
+use Spatie\Tags\HasTags;
+
 
 class TestController extends Controller
 {
@@ -27,7 +31,7 @@ class TestController extends Controller
    */
   public function create()
   {
-    //
+    return view('view-quiz')->with('tags', $tags);
   }
 
   /**
@@ -39,14 +43,15 @@ class TestController extends Controller
   public function store(Request $request)
   {
 
+
     if ($request->hasFile('file')) {
       $file = $request->file('file');
       $request->validate([
-        'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:10',
+        'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:5',
       ]);
       $imageName = time() . '.' . $request->file->extension();
       $request->file = $imageName;
-      $file->move(public_path('test_images'), $imageName);    
+      $file->move(public_path('test_images'), $imageName);
     }
 
     $test = new Test();
@@ -54,8 +59,29 @@ class TestController extends Controller
     $test->titre = $request->title;
     $test->description = $request->description;
     $test->image = $request->file;
+    
+    // $input = $request->all();
+    // $tags = explode(",", $input['tags']);
+    // $test = Test::create($input);
+    // $test->tag($tags);
+
     $test->save();
 
+    $tags = $request->input('tags', []);
+
+    if ($test) {
+      if (is_array($tags)) {
+          $tags_array = array_map('trim', $tags);
+          $tags_array = array_filter($tags_array);
+  
+          foreach ($tags_array as $tag) {
+              $new_tag = Tag::firstOrCreate(['name' => $tag]);
+              $test->tags()->attach($new_tag, ['test_id' => $test->id]);
+          }
+      }
+  }
+
+  $test->save();
 
     $keys = array_keys($request->all());
     $questionKeys = array_values(preg_grep("/^question_/", $keys));
@@ -85,7 +111,7 @@ class TestController extends Controller
       $i++;
     }
 
-    return redirect('/mytests')->with('success', 'Test Inserted successfully');
+    return redirect('/mytests')->with('success', 'Test Inserted successfully')->with('tags',$tags);
   }
 
   /**

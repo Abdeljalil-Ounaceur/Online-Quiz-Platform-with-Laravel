@@ -15,8 +15,8 @@ return new class extends Migration
   {
     Schema::create('tests', function (Blueprint $table) {
       $table->id();
-      $table->foreignId('user_id')->constrained('users');
       $table->string('titre', 40);
+      $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
       $table->string('description', 500)->nullable();
       $table->string('image')->nullable();
       $table->timestamps();

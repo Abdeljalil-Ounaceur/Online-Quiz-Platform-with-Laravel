@@ -20,7 +20,18 @@
             <label for="description">Description</label>
             <textarea type="text" id="description" rows="4" class="form-control"
               name="description">{{$test->description}}</textarea>
-          </div>
+            </div>
+            <label for="image">Upload test image : <span class="text-danger">*</span></label></label>
+            <input type="file" name="file" id="file" class="form-control">
+          <div class="form-group">
+            <label>Tags : <span class="text-danger">*</span><span class="text-muted"></span></label>
+            <br>
+            <input type="text" name="tags[]" class="form-control tags" id="tags" placeholder="Enter tags separated by commas">
+            <br>
+            @if ($errors->has('tags'))
+                <span class="text-danger">{{ $errors->first('tags') }}</span>
+            @endif
+        </div>
           <ul id="questions" class="list-group">
             @php($i=1)
             @foreach ($test->questions as $question)
