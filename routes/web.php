@@ -65,12 +65,14 @@ Route::group(['middleware' => 'auth'], function () {
 
   Route::middleware('candidat')->group(function () {
     Route::get('/tests', [CandidatController::class, 'listTests'])->name('tests');
+    Route::get('/tests/search', [TestController::class, 'search'])->name('tests.search');   
     Route::get('/passer-test-{id}', [CandidatController::class, 'passTest'])->name('passer-test');
     Route::post('/calculer-resultat', [ResultatController::class, 'store'])->name('calculer-resultat');
     Route::get('/mes-resultats', [ResultatController::class, 'index'])->name('mes-resultats');
     Route::get('/view-result-{id}', [ResultatController::class, 'show'])->name('view-result');
     Route::get('/delete-result-{id}', [ResultatController::class, 'destroy'])->name('delete-result');
     Route::get('/view-test-{id}', [PageController::class, 'view'])->name('view-test');
+    Route::post('/filtered',[CandidatController::class, 'filterTest'])->name('candidats.tests.filterC');
   });
 
   Route::middleware('teacher')->group(function () {
@@ -80,6 +82,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/update-test', [TestController::class, 'update'])->name('update-test');
     Route::get('/delete-test-{id}', [TestController::class, 'destroy'])->name('delete-test');
     Route::post('/store-test', [TestController::class, 'store'])->name('save-test');
+    Route::post('/testsFilter',[TeacherController::class, 'filterTests'])->name('teachers.tests.filter');
   });
 
 

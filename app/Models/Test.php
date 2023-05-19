@@ -14,7 +14,6 @@ class Test extends Model
     'user_id',
     'titre',
     'description',
-    'tags',
     'image'
   ];
 
@@ -36,5 +35,10 @@ class Test extends Model
   public function resultats()
   {
     return $this->hasMany(Resultat::class, 'id_test');
+  }
+
+  public function user()
+  {
+    return $this->belongsTo(User::class, 'user_id');
   }
 }

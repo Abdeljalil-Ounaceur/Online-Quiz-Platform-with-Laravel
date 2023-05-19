@@ -4607,6 +4607,13 @@ textarea.form-control-lg {
   flex-grow: 1;
   align-items: center;
 }
+.navbar-collapse-v {
+  flex-basis: 100%;
+  flex-grow: 1;
+  width: 2x;
+  align-items: center;
+}
+
 
 .navbar-toggler {
   padding: 0.25rem 0.75rem;
@@ -21054,6 +21061,11 @@ hr.horizontal.gray-light {
 .navbar {
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.16);
 }
+
+.navbar-topbar{
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.16);
+}
+
 .navbar .navbar-brand {
   color: #344767;
   font-size: 0.875rem;

@@ -12,10 +12,13 @@
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                <form action="{{ route('teachers.tests.filter') }}" method="POST">
+                    @csrf
                 <div class="input-group">
-                    <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-                    <input type="text" class="form-control" placeholder="Type here...">
+                    <input type="text" class="form-control" placeholder="Search here..." name="search" id="search-input" style="height:42px ">
+                    <button class="btn btn-outline-white" type="submit" id="search-button"><i class="fas fa-search" aria-hidden="true"></i></button>
                 </div>
+                </form>
             </div>
             <ul class="navbar-nav  justify-content-end">
                 <li class="nav-item d-flex align-items-center">
