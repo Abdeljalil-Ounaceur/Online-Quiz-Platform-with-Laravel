@@ -1,7 +1,7 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'My Tests'])
+    @include('layouts.navbars.auth.teacher.topnav', ['title' => 'My Tests'])
     <div class="container-fluid py-4">
         <form method="POST" action="{{ route('save-test') }}" enctype="multipart/form-data">
             @csrf

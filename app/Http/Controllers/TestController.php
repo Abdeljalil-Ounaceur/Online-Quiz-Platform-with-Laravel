@@ -22,6 +22,8 @@ class TestController extends Controller
 
   public function index()
   {
+    $tests = Test::all();
+    return view('pages.candidat.tests',compact('tests')); //->with('tags', $tags)
   }
 
   /**
@@ -31,7 +33,7 @@ class TestController extends Controller
    */
   public function create()
   {
-    return view('view-quiz')->with('tags', $tags);
+    return view('view-quiz');
   }
 
   /**
@@ -44,21 +46,20 @@ class TestController extends Controller
   {
 
 
+    $test = new Test();
+    $test->user_id = auth()->user()->id;
+    $test->titre = $request->title;
+    $test->description = $request->description;
+
     if ($request->hasFile('file')) {
       $file = $request->file('file');
       $request->validate([
         'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:5',
       ]);
       $imageName = time() . '.' . $request->file->extension();
-      $request->file = $imageName;
+      $test->image = $imageName;
       $file->move(public_path('test_images'), $imageName);
     }
-
-    $test = new Test();
-    $test->user_id = auth()->user()->id;
-    $test->titre = $request->title;
-    $test->description = $request->description;
-    $test->image = $request->file;
     
     // $input = $request->all();
     // $tags = explode(",", $input['tags']);
@@ -160,4 +161,48 @@ class TestController extends Controller
     Test::findOrFail($id)->delete();
     return back()->with('success', 'Test deleted successfullt');
   }
+
+
+  public function search(Request $request)
+  {
+    // $search = $request->get('search');
+    // $tests = Test::where('titre', 'like', '%' . $search . '%')->paginate(5);
+    // return view('pages.teacher.mytests', ['tests' => $tests]);
+
+  //   $search = $request->input('search');
+  //   // $tags = $request->input('tags');
+
+  //   $tests = Test::query();
+
+  //   if ($search) {
+  //       $tests->where(function ($query) use ($search) {
+  //           $query->where('name', 'like', '%'.$search.'%')
+  //                 ->orWhere('description', 'like', '%'.$search.'%');
+  //       });
+  //   }
+
+  //   // if ($tags) {
+  //   //     $tests->whereHas('tags', function ($query) use ($tags) {
+  //   //         $query->whereIn('id', $tags);
+  //   //     });
+  //   // }
+
+  //   $tests = $tests->select('tests.*', DB::raw('count(*) as tag_count'))
+  //                        ->groupBy('tests.id')
+  //                        ->orderByRaw('tag_count desc')
+  //                        ->get();
+
+  //   return view('tests.index', compact('tests'));
+  // }
+
+
+  $query = $request->input('search');
+
+    $testS = Test::where('name', 'like', '%'.$query.'%')
+        ->orWhere('description', 'like', '%'.$query.'%')
+        ->get();
+
+    return view('pages.candidat.tests', compact('testS'));
+}
+
 }

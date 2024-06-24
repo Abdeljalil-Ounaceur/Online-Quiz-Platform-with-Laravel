@@ -1,7 +1,7 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-yellow-100'])
 
 @section('content')
-@include('layouts.navbars.auth.topnav', ['title' => 'Your Profile'])
+@include('layouts.navbars.auth.candidat.topnav', ['title' => 'Your Profile'])
 
 <div id="alert">
   @include('components.alert')
